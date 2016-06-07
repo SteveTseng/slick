@@ -5,6 +5,7 @@ const io = require('socket.io')(server);
 const songsController = require('./controllers/songsController');
 const cors = require('cors');
 
+
 app.use(cors());
 
 //setting up path directory and going up one level
@@ -42,5 +43,9 @@ io.on('connection', socket => {
   });
 
 });
+
+//---------------------------------------------------------------------------new addition
+
+
 
 module.exports = app;
