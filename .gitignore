@@ -3,3 +3,4 @@ node_modules/
 src/bundle.js
 src/bundle.js.map
 client-id.js
+.eslintrc
