@@ -10,7 +10,8 @@ const socket = io();
 
 class Slick extends React.Component {
   constructor() {
-    //initial state is an empty array
+    super();
+    // initial state is an empty array
     this.state = {
       firstSong: {},
       songInfo: [],
