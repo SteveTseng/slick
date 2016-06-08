@@ -9,8 +9,8 @@ class SearchForm extends React.Component {
 	render() {
 		return ( 
       		<div className="searchform"> 
-      			<form id="searchform" onSubmit={this.props.submitHandler}>
-        			<input type="text" refs="search" className="searchbar" />
+      			<form id="searchform" onSubmit={this.props.submitHandler} >
+        			<input type="text" refs="search" className="searchbar" onChange={this.props.updateSearchText}/>
         			<input type="submit" className="submit" />
       			</form>
       		</div>

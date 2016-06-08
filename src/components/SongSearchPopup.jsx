@@ -15,12 +15,16 @@ class SongSearchPopup extends React.Component {
 	          songName: "DJ syntactic sugah",
 	          thumbnailUrl: null,
 	          trackUrl: null,
-			}]
+			}],
+			searchText: ''
 		}
 		this.submitHandler = this.submitHandler.bind(this);
+		this.updateSearchText = this.updateSearchText.bind(this);
+		this.addSong = this.addSong.bind(this);
 	}
 
 	submitHandler(e) {
+		//console.log(this.state.searchText)
 		e.preventDefault();  
 		//console.log('initializing SC');
 	    SC.initialize({
@@ -28,9 +32,9 @@ class SongSearchPopup extends React.Component {
 	    });
 	    //console.log('making the SC search query');
 	    // q is the general search query
-	    console.log('input', e.target.value.onChange)
+	    //console.log('input', e.target.value.onChange)
 	    SC.get('/tracks', {
-	      q: ReactDOM.findDOMNode(e.target.value),
+	      q: this.state.searchText,
 	    }).then( (tracks) => {
 	      //console.log('back from the SC search query');
 	      //console.log(tracks);
@@ -47,9 +51,14 @@ class SongSearchPopup extends React.Component {
 	      });
 	    });		
 	}  
-  
-	addSong(){ 
-		return this.props.onClicky(this.props.index);
+	addSong(index){ 
+		return this.props.onClicky(this.state.searchResults[index]);
+	}
+
+	updateSearchText(e){
+		this.setState({
+			searchText: e.target.value
+		})
 	}
 
 	render () { 
@@ -59,7 +68,7 @@ class SongSearchPopup extends React.Component {
 		})
 		return(
 			<div>
-				<SearchForm submitHandler={this.submitHandler}/>  
+				<SearchForm submitHandler={this.submitHandler} updateSearchText={this.updateSearchText}/>  
 				<ul className="searchResults">
 					{songNodes} 
 				</ul> 
