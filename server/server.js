@@ -29,7 +29,7 @@ io.on('connection', socket => {
     console.log('received songUrl: ', songUrl)
     io.emit('playSong', songUrl);
   });
-
+  socket.on('updateQueue', (songObj) => io.emit('updateQueue', songObj));
 
   // add playCurrent event handler
   socket.on('playCurrent', () => io.emit('playCurrent'));

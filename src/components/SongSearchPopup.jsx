@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import SongsResult from './SongsResult.jsx';
 import SearchForm from './SearchForm.jsx';
 
- 
+
 class SongSearchPopup extends React.Component {
 	constructor(){
 		super();
@@ -25,7 +25,7 @@ class SongSearchPopup extends React.Component {
 
 	submitHandler(e) {
 		//console.log(this.state.searchText)
-		e.preventDefault();  
+		e.preventDefault();
 		//console.log('initializing SC');
 	    SC.initialize({
 	      client_id: 'c3a6a7d9251cca666d47267c16038fa1',
@@ -49,9 +49,9 @@ class SongSearchPopup extends React.Component {
 	      this.setState({
 	        searchResults: mappedTracks
 	      });
-	    });		
-	}  
-	addSong(index){ 
+	    });
+	}
+	addSong(index){
 		return this.props.onClicky(this.state.searchResults[index]);
 	}
 
@@ -61,19 +61,19 @@ class SongSearchPopup extends React.Component {
 		})
 	}
 
-	render () { 
-		console.log('searchpoprender',this.state)
-		let songNodes = this.state.searchResults.map((song, index) => { 
+	render () {
+		// console.log('searchpoprender',this.state)
+		let songNodes = this.state.searchResults.map((song, index) => {
 			return <SongsResult data={song.songName} key={index} clicked={this.addSong} index={index} />
 		})
 		return(
 			<div>
-				<SearchForm submitHandler={this.submitHandler} updateSearchText={this.updateSearchText}/>  
+				<SearchForm submitHandler={this.submitHandler} updateSearchText={this.updateSearchText}/>
 				<ul className="searchResults">
-					{songNodes} 
-				</ul> 
+					{songNodes}
+				</ul>
 			</div>
-		) 
+		)
 	}
 }
 

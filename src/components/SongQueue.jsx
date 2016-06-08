@@ -5,7 +5,7 @@ import Songs from './Songs.jsx'
 
 const SongQueue = (props) => {
   //iterating over json to make song divs
-  console.log('there is a prop', props)
+  // console.log('there is a prop', props)
   const createList = () => {
     return props.songInfo.map((songz, i) => {
       return (<Songs
