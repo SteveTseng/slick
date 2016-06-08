@@ -31,7 +31,9 @@ class Slick extends React.Component {
 
   newSongClick(i) {
     const songObj = this.state.songInfo[i];
+    console.log('songObj:', this.state.songInfo[i]);
     const songUrl = songObj.trackUrl;
+    console.log('trackUrl:', songObj.trackUrl);
     socket.emit('playSong', songUrl);
   }
 
@@ -40,12 +42,11 @@ class Slick extends React.Component {
   }
 
   updateSong(url) {
-    const index = this.state.songInfo.indexOf()
     for (var i = 0; i < this.state.songInfo.length; i++) {
       if (this.state.songInfo[i].trackUrl === url)
         break;
     }
-    let arraycopy = this.state.songInfo;
+    let arraycopy = this.state.songInfo.slice(0);
     let nextSong = arraycopy.splice(i, 1);
     this.setState({
       firstSong: nextSong[0],
@@ -67,6 +68,7 @@ class Slick extends React.Component {
     //save reference to audio object in SongPlayer component
     this.audio = document.getElementsByTagName('audio')[0];
 
+    console.log('hostAddress/songQueue', `${this.props.hostAddress}/songQueue`);
     let that = this;
     $.ajax({
       method: 'GET',
@@ -88,10 +90,14 @@ class Slick extends React.Component {
     socket.on('songEnded', this.onEnded);
   }
 
-  clickHandler(index){
+  clickHandler(songObj){
+    let songInfofo = this.state.songInfo.slice(0);
+    console.log('songInfofo is not as complicated as it sounds:', songInfofo);
+    songInfofo.push(songObj);
     this.setState({
-      //this.state.songInfo.push()
+      songInfo: songInfofo
     })
+    console.log("this is song info", this.state.songInfo)
   }
 
   searchClicked() {
@@ -106,6 +112,7 @@ class Slick extends React.Component {
     if (this.state.searchClicked) {
       popUp = <SongSearchPopup onClicky={this.clickHandler} />
     }
+    console.log('this is state songinfo',this.state.songInfo)
     return (
       <div>
         <SongPlayer
@@ -124,6 +131,6 @@ class Slick extends React.Component {
 }
 
 ReactDOM.render(
-  <Slick hostAddress="YOUR_IP_ADDRESS:3000"/>,
+  <Slick hostAddress="http://localhost:3000"/>,
   document.getElementById('content')
 )
