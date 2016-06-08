@@ -69,19 +69,19 @@ class Slick extends React.Component {
     this.audio = document.getElementsByTagName('audio')[0];
 
     console.log('hostAddress/songQueue', `${this.props.hostAddress}/songQueue`);
-    let that = this;
-    $.ajax({
-      method: 'GET',
-      url: `${this.props.hostAddress}/songQueue`,
-      contentType: 'application/json',
-      dataTyle: 'json',
-      success: data => {
-        that.setState({
-          firstSong: data.shift(),
-          songInfo: data
-        });
-      }
-    });
+    // let that = this;
+    // $.ajax({
+    //   method: 'GET',
+    //   url: `${this.props.hostAddress}/songQueue`,
+    //   contentType: 'application/json',
+    //   dataTyle: 'json',
+    //   success: data => {
+    //     that.setState({
+    //       firstSong: data.shift(),
+    //       songInfo: data
+    //     });
+    //   }
+    // });
 
     // listen for emit events from the server
     socket.on('playSong', this.handleServerPlayEvent);
