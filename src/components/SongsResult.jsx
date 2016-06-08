@@ -19,8 +19,7 @@ class SongsResult extends React.Component {
 				<div>
 					<button onClick={this.songHandler}>Add</button>
 						{this.props.data}
-					</div>
-			</br>
+				</div>
 		</span>
 		)
 	}
