@@ -27,17 +27,19 @@ class Slick extends React.Component {
     this.onEnded = this.onEnded.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
     this.searchClicked = this.searchClicked.bind(this);
+    this.updateQueue = this.updateQueue.bind(this);
   }
 
   newSongClick(i) {
     const songObj = this.state.songInfo[i];
-    console.log('songObj:', this.state.songInfo[i]);
+    // console.log('songObj:', this.state.songInfo[i]);
     const songUrl = songObj.trackUrl;
-    console.log('trackUrl:', songObj.trackUrl);
+    console.log('trackUrl in newSongClick() in main.jsx:', songObj.trackUrl);
     socket.emit('playSong', songUrl);
   }
 
   handleServerPlayEvent(songUrl) {
+    console.log('handleServerPlayEvent called (from socket emit), now calling updateSong()');
     this.updateSong(songUrl);
   }
 
@@ -48,6 +50,7 @@ class Slick extends React.Component {
     }
     let arraycopy = this.state.songInfo.slice(0);
     let nextSong = arraycopy.splice(i, 1);
+    console.log('updateSong called, about to set new state.firstSong');
     this.setState({
       firstSong: nextSong[0],
       songInfo: arraycopy,
@@ -65,10 +68,10 @@ class Slick extends React.Component {
   }
   //doing async request in cdm
   componentDidMount() {
+    console.log("componentDidMount called!");
     //save reference to audio object in SongPlayer component
     this.audio = document.getElementsByTagName('audio')[0];
 
-    console.log('hostAddress/songQueue', `${this.props.hostAddress}/songQueue`);
     // let that = this;
     // $.ajax({
     //   method: 'GET',
@@ -84,20 +87,26 @@ class Slick extends React.Component {
     // });
 
     // listen for emit events from the server
+    console.log("we're initializing our socket listeners!");
     socket.on('playSong', this.handleServerPlayEvent);
     socket.on('playCurrent', this.handleServerPlayCurrentSongEvent);
     socket.on('pauseCurrent', this.handleServerPauseCurrentSongEvent);
     socket.on('songEnded', this.onEnded);
+    socket.on('updateQueue', (songObj) => { this.updateQueue(songObj) });
   }
 
-  clickHandler(songObj){
+  updateQueue(songObj) {
     let songInfofo = this.state.songInfo.slice(0);
-    console.log('songInfofo is not as complicated as it sounds:', songInfofo);
+    // console.log('songInfofo is not as complicated as it sounds:', songInfofo);
     songInfofo.push(songObj);
     this.setState({
       songInfo: songInfofo
     })
-    console.log("this is song info", this.state.songInfo)
+  }
+
+  clickHandler(songObj){
+    socket.emit('updateQueue', songObj);
+    // console.log("this is song info", this.state.songInfo)
   }
 
   searchClicked() {
@@ -105,14 +114,14 @@ class Slick extends React.Component {
       searchClicked:true
     })
   }
-  
+
   render() {
     //songplayer gets an empty string as props before the component mounds
     let popUp = '';
     if (this.state.searchClicked) {
       popUp = <SongSearchPopup onClicky={this.clickHandler} />
     }
-    console.log('this is state songinfo',this.state.songInfo)
+    // console.log('this is state songinfo',this.state.songInfo)
     return (
       <div>
         <SongPlayer
@@ -123,7 +132,7 @@ class Slick extends React.Component {
         <SongQueue
           songInfo={this.state.songInfo}
           handleNewSongClick={this.newSongClick}/>
-        <button onClick={this.searchClicked}>Song Search</button>
+        <button onClick={this.searchClicked} className='songSearchBtn'>search</button>
         {popUp}
       </div>
     )
