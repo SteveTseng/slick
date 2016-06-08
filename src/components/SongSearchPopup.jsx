@@ -10,12 +10,7 @@ class SongSearchPopup extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			searchResults: [{
-			  artist: "Jessica",
-	          songName: "DJ syntactic sugah",
-	          thumbnailUrl: null,
-	          trackUrl: null,
-			}],
+			searchResults: [],
 			searchText: ''
 		}
 		this.submitHandler = this.submitHandler.bind(this);
