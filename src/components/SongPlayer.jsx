@@ -13,6 +13,7 @@ class SongPlayer extends React.Component {
     // convenient way of passing audio url using SoundCloud API to <audio>
     // element
     const audioUrl = this.props.currSong.trackUrl + `?client_id=${this.clientId}`;
+    console.log('audioUrl in SongPlayer.jsx renter(): ' + audioUrl);
     return (
       <div className="song-player">
         <img src={this.props.currSong.thumbnailUrl}></img>
