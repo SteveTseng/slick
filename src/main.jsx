@@ -6,6 +6,7 @@ import SongQueue from './components/SongQueue.jsx';
 import SongPlayer from './components/SongPlayer.jsx';
 import Songs from './components/Songs.jsx';
 import SearchBox from './components/SearchBox.jsx';
+import LoginBox from './components/loginBox.jsx';
 
 const socket = io();
 
@@ -89,6 +90,7 @@ class Slick extends React.Component {
     //songplayer gets an empty string as props before the component mounds
     return (
       <div>
+        <LoginBox />
         <SongPlayer
           currSong={this.state.firstSong || ''}
           onPlay={this.onPlay}

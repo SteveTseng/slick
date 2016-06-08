@@ -79,3 +79,26 @@ audio {
   margin: 0;
   font-size: 17px;
 }
+
+.login-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.login-box button {
+  width: 150px;
+  height: 30px;
+  font-size: 16px;
+}
+.loginFormWrap
+.registerFormWrap {
+  width: 300px;
+}
+#login-button,
+.loginFormWrap {
+  background-color: purple;
+}
+#register-button,
+.registerFormWrap {
+  background-color: yellow;
+}
