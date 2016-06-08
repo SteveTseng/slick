@@ -1,6 +1,6 @@
 'use strict';
 
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const db = require('./../models/dbModel');
 
 const Song = db.define('song', {
@@ -8,6 +8,9 @@ const Song = db.define('song', {
 		type:Sequelize.INTEGER,
 		primaryKey: true,
 		autoIncrement:true
+	},
+	username:{
+		type:Sequelize.STRING
 	},
 	title:{
 		type:Sequelize.STRING
