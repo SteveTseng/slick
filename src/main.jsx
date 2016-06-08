@@ -3,8 +3,9 @@ import 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SongQueue from './components/SongQueue.jsx';
-import SongPlayer from './components/SongPlayer.jsx'
-import Songs from './components/Songs.jsx'
+import SongPlayer from './components/SongPlayer.jsx';
+import Songs from './components/Songs.jsx';
+import SongSearchPopup from './components/SongSearchPopup.jsx';
 
 const socket = io();
 
@@ -15,6 +16,7 @@ class Slick extends React.Component {
     this.state = {
       firstSong: {},
       songInfo: [],
+      searchClicked: false,
     };
     this.newSongClick = this.newSongClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -23,7 +25,8 @@ class Slick extends React.Component {
     this.handleServerPlayCurrentSongEvent = this.handleServerPlayCurrentSongEvent.bind(this);
     this.handleServerPauseCurrentSongEvent = this.handleServerPauseCurrentSongEvent.bind(this);
     this.onEnded = this.onEnded.bind(this);
-
+    this.clickHandler = this.clickHandler.bind(this);
+    this.searchClicked = this.searchClicked.bind(this);
   }
 
   newSongClick(i) {
@@ -85,20 +88,36 @@ class Slick extends React.Component {
     socket.on('songEnded', this.onEnded);
   }
 
+  clickHandler(index){
+    this.setState({
+      //this.state.songInfo.push()
+    })
+  }
+
+  searchClicked() {
+    this.setState({
+      searchClicked:true
+    })
+  }
+  
   render() {
     //songplayer gets an empty string as props before the component mounds
+    let popUp = '';
+    if (this.state.searchClicked) {
+      popUp = <SongSearchPopup onClicky={this.clickHandler} />
+    }
     return (
       <div>
         <SongPlayer
           currSong={this.state.firstSong || ''}
           onPlay={this.onPlay}
           onPause={this.onPause}
-          onEnded = {this.onEnded}
-           />
+          onEnded = {this.onEnded}/>
         <SongQueue
           songInfo={this.state.songInfo}
-          handleNewSongClick={this.newSongClick}
-          />
+          handleNewSongClick={this.newSongClick}/>
+        <button onClick={this.searchClicked}>Song Search</button>
+        {popUp}
       </div>
     )
   }
