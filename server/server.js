@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server);
-const songsController = require('./controllers/songsController');
 const cors = require('cors');
+const userController = require('./user/userController')
 
 
 app.use(cors());
@@ -19,9 +19,6 @@ app.get('/', (req, res) => {
 // client logic will request this API once index.html loads
 // to retrieve stock song queue to generate list of songs
 // to render on page
-app.get('/songQueue', songsController.getSongsData, (req, res) => {
-  res.json(req.data);
-});
 
 io.on('connection', socket => {
   console.log('new client connected');

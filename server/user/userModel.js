@@ -12,4 +12,4 @@ const User = db.define('user', {
 	}
 })
 
-module.export = User;
+module.exports = User;

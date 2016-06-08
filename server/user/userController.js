@@ -9,7 +9,7 @@ module.exports = {
 			return User.create(request.body)
 		})
 	},
-	verifyUser: function(requesst, response){
+	verifyUser: function(request, response){
 		let userInfo = request.query;
 		User.sync().then(()=>{
 			User.findAll({
@@ -19,7 +19,7 @@ module.exports = {
 				},
 			});
 		}).then((userInfoObj)=>{
-			console.log(userInfoObj);
-		});
+			response.send('logged in')
+		})
 	}
 };
