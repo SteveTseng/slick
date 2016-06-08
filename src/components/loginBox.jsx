@@ -4,11 +4,17 @@ class LoginBox extends React.Component {
   constructor() {
     super();
     this.state = {
-      loginBox: false
+      loginBox: false,
+      username: null,
+      password: null
     };
     // bind all o' this!
     this.registerClicked = this.registerClicked.bind(this);
     this.loginClicked = this.loginClicked.bind(this);
+    this.createUser = this.createUser.bind(this);
+    this.verifyUser = this.verifyUser.bind(this);
+    this.recordingUsername = this.recordingUsername.bind(this);
+    this.recordingPassword = this.recordingPassword.bind(this);
   }
 
   registerClicked() {
@@ -23,6 +29,32 @@ class LoginBox extends React.Component {
     this.setState({ loginBox: 'login' });
   }
 
+  createUser(e){
+    e.preventDefault();
+  }
+
+  verifyUser(e){
+    e.preventDefault();
+    $.get('http://localhost:3000/user?username='+ this.state.username +'&password='+ this.state.password).done(function(data){
+      console.log('data from get request: ', data);
+      //that.dataParsing(data);
+    });
+  }
+
+  recordingUsername(e){
+    e.preventDefault();
+    this.setState({
+      username:e.target.value,
+    })
+  }
+
+  recordingPassword(e){
+    e.preventDefault();
+    this.setState({
+      password:e.target.value,
+    })
+  }
+
   render() {
     let theBox = '';
     if (this.state.loginBox) {
@@ -30,14 +62,17 @@ class LoginBox extends React.Component {
         // render login
         theBox =
           <div className='loginFormWrap'>
-            <form id='loginForm'>
+            <form id='loginForm' onSubmit={this.verifyUser}>
               <div>
                 <label for='username'>Username</label>
-                <input type='text' id='username' name='username' />
+                <input type='text' id='username' name='username' onChange={this.recordingUsername}/>
               </div>
               <div>
                 <label for='password'>Password</label>
-                <input type='text' id='password' name='password' />
+                <input type='text' id='password' name='password' onChange={this.recordingPassword}/>
+              </div>
+              <div>
+                <input type='submit'/>
               </div>
             </form>
           </div>
@@ -46,14 +81,17 @@ class LoginBox extends React.Component {
         // render register
         theBox =
           <div className='registerFormWrap'>
-            <form id='registerForm'>
+            <form id='registerForm' onSubmit={this.createUser}>
               <div>
                 <label for='username'>Username</label>
-                <input type='text' id='username' name='username' />
+                <input type='text' id='username' name='username' onChange={this.recordingUsername}/>
               </div>
               <div>
                 <label for='password'>Password</label>
-                <input type='text' id='password' name='password' />
+                <input type='text' id='password' name='password' onChange={this.recordingPassword}/>
+              </div>
+              <div>
+                <input type='submit'/>
               </div>
             </form>
           </div>

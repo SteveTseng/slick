@@ -26,12 +26,9 @@ class Slick extends React.Component {
     this.handleServerPlayCurrentSongEvent = this.handleServerPlayCurrentSongEvent.bind(this);
     this.handleServerPauseCurrentSongEvent = this.handleServerPauseCurrentSongEvent.bind(this);
     this.onEnded = this.onEnded.bind(this);
-<<<<<<< HEAD
     this.clickHandler = this.clickHandler.bind(this);
     this.searchClicked = this.searchClicked.bind(this);
     this.updateQueue = this.updateQueue.bind(this);
-=======
->>>>>>> login
   }
 
   newSongClick(i) {
@@ -136,16 +133,9 @@ class Slick extends React.Component {
           onEnded = {this.onEnded}/>
         <SongQueue
           songInfo={this.state.songInfo}
-<<<<<<< HEAD
           handleNewSongClick={this.newSongClick}/>
         <button onClick={this.searchClicked} className='songSearchBtn'>search</button>
         {popUp}
-=======
-          handleNewSongClick={this.newSongClick}
-          />
-        <SearchBox
-          />
->>>>>>> login
       </div>
     )
   }
