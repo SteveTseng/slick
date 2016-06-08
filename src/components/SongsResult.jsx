@@ -14,11 +14,13 @@ class SongsResult extends React.Component {
 			)
 	} 
 	render(){
-		return(
-		<ul>
-			<button onClick={this.songHandler}>Add</button>
-			<li>{this.props.data}</li>
-		</ul>
+		return(	
+		<span>
+				<div>
+					<button onClick={this.songHandler}>Add</button>
+						{this.props.data}
+				</div>
+		</span>
 		)
 	}
 }

@@ -3,9 +3,9 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('postgres//soslick:soslick@localhost/soslick');
 
-sequelize.authenticate().then(errors => {
-	console.log('sequelize loaded, and authenticating')
-	console.log(errors)
-});
+sequelize.authenticate()
+	.then(()=>{console.log('connected!')})
+	.catch((err)=>{console.log('error',err)})
+	.done();
 
 module.exports = sequelize;

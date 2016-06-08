@@ -41,10 +41,12 @@ io.on('connection', socket => {
     console.log('song has ended!')
     io.emit('songEnded', songUrl);
   });
-
 });
 
-//---------------------------------------------------------------------------new addition
+//--------------------------------authentication--------------------------------
+
+app.get('/user', userController.verifyUser);
+app.post('/user', userController.createUser);
 
 
 

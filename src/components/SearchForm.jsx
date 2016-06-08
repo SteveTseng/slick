@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 
 class SearchForm extends React.Component {
 
-
 	render() {
 		return ( 
       		<div className="searchform"> 

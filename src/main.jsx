@@ -76,7 +76,6 @@ class Slick extends React.Component {
     //save reference to audio object in SongPlayer component
     this.audio = document.getElementsByTagName('audio')[0];
 
-    // console.log('hostAddress/songQueue', `${this.props.hostAddress}/songQueue`);
     // let that = this;
     // $.ajax({
     //   method: 'GET',
@@ -139,7 +138,7 @@ class Slick extends React.Component {
           songInfo={this.state.songInfo}
 <<<<<<< HEAD
           handleNewSongClick={this.newSongClick}/>
-        <button onClick={this.searchClicked}>Song Search</button>
+        <button onClick={this.searchClicked} className='songSearchBtn'>search</button>
         {popUp}
 =======
           handleNewSongClick={this.newSongClick}
