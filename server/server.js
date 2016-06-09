@@ -3,10 +3,11 @@ const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server);
 const cors = require('cors');
-const userController = require('./user/userController')
-
+const userController = require('./user/userController');
+const bodyParser = require('body-parser');
 
 app.use(cors());
+app.use(bodyParser.json());
 
 //setting up path directory and going up one level
 app.use(express.static(__dirname + '/..'));

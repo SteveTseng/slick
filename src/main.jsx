@@ -18,6 +18,7 @@ class Slick extends React.Component {
       firstSong: {},
       songInfo: [],
       searchClicked: false,
+      loggedIn:false
     };
     this.newSongClick = this.newSongClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -29,6 +30,7 @@ class Slick extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.searchClicked = this.searchClicked.bind(this);
     this.updateQueue = this.updateQueue.bind(this);
+    this.loggedInHandler = this.loggedInHandler.bind(this);
   }
 
   newSongClick(i) {
@@ -116,6 +118,14 @@ class Slick extends React.Component {
     })
   }
 
+  loggedInHandler(username){
+    if(username){
+      this.setState({
+        loggedIn:true
+      })
+    }
+  }
+
   render() {
     //songplayer gets an empty string as props before the component mounds
     let popUp = '';
@@ -125,7 +135,7 @@ class Slick extends React.Component {
     // console.log('this is state songinfo',this.state.songInfo)
     return (
       <div>
-        <LoginBox />
+        <LoginBox loggedInHandler={this.loggedInHandler} />
         <SongPlayer
           currSong={this.state.firstSong || ''}
           onPlay={this.onPlay}

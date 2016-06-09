@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mbchoa/slick#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "bower": "^1.7.9",
     "buble-react-rollup-starter": "^1.2.0",
     "cors": "^2.7.1",
