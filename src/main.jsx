@@ -6,6 +6,7 @@ import SongQueue from './components/SongQueue.jsx';
 import SongPlayer from './components/SongPlayer.jsx';
 import Songs from './components/Songs.jsx';
 import SongSearchPopup from './components/SongSearchPopup.jsx';
+import LoginBox from './components/loginBox.jsx';
 
 const socket = io();
 
@@ -17,7 +18,11 @@ class Slick extends React.Component {
       firstSong: {},
       songInfo: [],
       searchClicked: false,
+<<<<<<< HEAD
       usersCount: 1
+=======
+      loggedIn:false
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
     };
     this.newSongClick = this.newSongClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -29,8 +34,12 @@ class Slick extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.searchClicked = this.searchClicked.bind(this);
     this.updateQueue = this.updateQueue.bind(this);
+<<<<<<< HEAD
     this.closeSearchBox = this.closeSearchBox.bind(this);
     this.userCount = this.userCount.bind(this);
+=======
+    this.loggedInHandler = this.loggedInHandler.bind(this);
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
   }
 
   newSongClick(i) {
@@ -120,6 +129,7 @@ class Slick extends React.Component {
     })
   }
 
+<<<<<<< HEAD
   closeSearchBox() {
     this.setState({
       searchClicked:false
@@ -134,6 +144,16 @@ class Slick extends React.Component {
 
   usersListener(e) { socket.emit('usersCount'); }
 
+=======
+  loggedInHandler(username){
+    if(username){
+      this.setState({
+        loggedIn:true
+      })
+    }
+  }
+
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
   render() {
     //songplayer gets an empty string as props before the component mounds
     let popUp = '';
@@ -145,6 +165,7 @@ class Slick extends React.Component {
     // console.log('this is state songinfo',this.state.songInfo)
     return (
       <div>
+        <LoginBox loggedInHandler={this.loggedInHandler} />
         <SongPlayer
           currSong={this.state.firstSong || ''}
           onPlay={this.onPlay}

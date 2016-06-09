@@ -46,6 +46,7 @@ class SongSearchPopup extends React.Component {
 	      });
 	    });
 	}
+  
 	addSong(index){
 		return this.props.onClicky(this.state.searchResults[index]);
 	}

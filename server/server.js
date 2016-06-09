@@ -26,6 +26,7 @@ app.get('/songQueue', songsController.getSongsData, (req, res) => {
 io.on('connection', socket => {
 
   var userCount = Object.keys(io.sockets.sockets).length;
+  var userLeft = userCount - 1;
   io.emit('userCount', userCount);
 
   console.log('new client connected');
@@ -48,7 +49,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', function () {
-    io.emit('user disconnected', userCount - 1);
+    io.emit('user disconnected', userLeft);
   });
 
 });
