@@ -15,13 +15,10 @@ class SongsResult extends React.Component {
 	} 
 	render(){
 		return(	
-		<span>
-				<div>
-					<button onClick={this.songHandler}>Add</button>
-						{this.props.data}
-					</div>
-			</br>
-		</span>
+			<div className="singleSongResult">
+					<span className="songResults"> {this.props.data} </span>
+					<button onClick={this.songHandler} className="addSongToPlaylistBtn">add</button>
+			</div>
 		)
 	}
 }

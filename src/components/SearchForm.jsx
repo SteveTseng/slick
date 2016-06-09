@@ -7,10 +7,10 @@ class SearchForm extends React.Component {
 
 	render() {
 		return ( 
-      		<div className="searchform"> 
+      		<div> 
       			<form id="searchform" onSubmit={this.props.submitHandler} >
-        			<input type="text" refs="search" className="searchbar" onChange={this.props.updateSearchText}/>
-        			<input type="submit" className="submit" />
+        			<input type="text" refs="search" className="searchbar" onChange={this.props.updateSearchText}
+                placeholder="search"/>
       			</form>
       		</div>
 		) 

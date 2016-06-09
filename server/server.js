@@ -24,9 +24,13 @@ app.get('/songQueue', songsController.getSongsData, (req, res) => {
 });
 
 io.on('connection', socket => {
+
+  var userCount = Object.keys(io.sockets.sockets).length;
+  io.emit('userCount', userCount);
+
   console.log('new client connected');
   socket.on('playSong', (songUrl) => {
-    console.log('received songUrl: ', songUrl)
+    //console.log('received songUrl: ', songUrl)
     io.emit('playSong', songUrl);
   });
   socket.on('updateQueue', (songObj) => io.emit('updateQueue', songObj));
@@ -37,15 +41,19 @@ io.on('connection', socket => {
   // add pauseCurrent event handler
   socket.on('pauseCurrent', () => io.emit('pauseCurrent'));
 
+  console.log('sockets', Object.keys(io.sockets.sockets).length);
   socket.on('songEnded', (songUrl) => {
     console.log('song has ended!')
     io.emit('songEnded', songUrl);
   });
 
+  socket.on('disconnect', function () {
+    io.emit('user disconnected', userCount - 1);
+  });
+
 });
 
 //---------------------------------------------------------------------------new addition
-
 
 
 module.exports = app;
