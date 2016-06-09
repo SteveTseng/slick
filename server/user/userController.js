@@ -4,7 +4,8 @@ const User = require('./userModel')
 
 module.exports = {
 	createUser: function(request, response){
-		let userInfo = request.query;
+		let userInfo = request.body
+		console.log(userInfo)
 		User.sync().then(()=>{
 			return User.create(request.body)
 		})
@@ -19,7 +20,7 @@ module.exports = {
 				},
 			});
 		}).then((userInfoObj)=>{
-			response.send('logged in')
+			response.send(userInfo.username)
 		})
 	}
 };
