@@ -18,7 +18,11 @@ class Slick extends React.Component {
       firstSong: {},
       songInfo: [],
       searchClicked: false,
+<<<<<<< HEAD
+      usersCount: 1
+=======
       loggedIn:false
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
     };
     this.newSongClick = this.newSongClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -30,7 +34,12 @@ class Slick extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.searchClicked = this.searchClicked.bind(this);
     this.updateQueue = this.updateQueue.bind(this);
+<<<<<<< HEAD
+    this.closeSearchBox = this.closeSearchBox.bind(this);
+    this.userCount = this.userCount.bind(this);
+=======
     this.loggedInHandler = this.loggedInHandler.bind(this);
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
   }
 
   newSongClick(i) {
@@ -96,6 +105,8 @@ class Slick extends React.Component {
     socket.on('pauseCurrent', this.handleServerPauseCurrentSongEvent);
     socket.on('songEnded', this.onEnded);
     socket.on('updateQueue', (songObj) => { this.updateQueue(songObj) });
+    socket.on('userCount', (userCount) => { this.userCount(userCount) });
+    socket.on('user disconnected', (userLeft) => {this.userCount(userLeft)});
   }
 
   updateQueue(songObj) {
@@ -118,6 +129,22 @@ class Slick extends React.Component {
     })
   }
 
+<<<<<<< HEAD
+  closeSearchBox() {
+    this.setState({
+      searchClicked:false
+    })
+  }
+
+  userCount(count) {
+    this.setState({
+      usersCount: count
+    })
+  }
+
+  usersListener(e) { socket.emit('usersCount'); }
+
+=======
   loggedInHandler(username){
     if(username){
       this.setState({
@@ -126,11 +153,14 @@ class Slick extends React.Component {
     }
   }
 
+>>>>>>> a569075c86d09a1327c7a216a66c074fe6cff752
   render() {
     //songplayer gets an empty string as props before the component mounds
     let popUp = '';
+    let searchBox = <button onClick={this.searchClicked} className='songSearchBtn'>search</button>
     if (this.state.searchClicked) {
-      popUp = <SongSearchPopup onClicky={this.clickHandler} />
+      popUp = <SongSearchPopup onClicky={this.clickHandler} closeSearchBox={this.closeSearchBox}/>
+      searchBox = '';
     }
     // console.log('this is state songinfo',this.state.songInfo)
     return (
@@ -144,8 +174,9 @@ class Slick extends React.Component {
         <SongQueue
           songInfo={this.state.songInfo}
           handleNewSongClick={this.newSongClick}/>
-        <button onClick={this.searchClicked} className='songSearchBtn'>search</button>
+        {searchBox}
         {popUp}
+        <div className="userCountNum"> {this.state.usersCount} </div>
       </div>
     )
   }

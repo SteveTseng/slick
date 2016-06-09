@@ -63,11 +63,12 @@ class SongSearchPopup extends React.Component {
 			return <SongsResult data={song.songName} key={index} clicked={this.addSong} index={index} />
 		})
 		return(
-			<div>
+			<div className="searchform">
 				<SearchForm submitHandler={this.submitHandler} updateSearchText={this.updateSearchText}/>
 				<ul className="searchResults">
 					{songNodes}
 				</ul>
+				<button className="closeSearchBox" onClick={this.props.closeSearchBox}> close </button>
 			</div>
 		)
 	}
