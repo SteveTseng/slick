@@ -1,7 +1,7 @@
 'use strict'
 
 const Sequelize = require('sequelize');
-//const sequelize = new Sequelize('postgres://user:stevetseng@live.com:5432/soslick');
+
 
 var sequelize = new Sequelize('d9ki06095ksntk', 'iatupkhoswxboy', 'JZsHbsHx6fi3Wc_lQ8s0CWGPZB', {
   host: 'ec2-54-243-47-213.compute-1.amazonaws.com',
