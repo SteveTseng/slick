@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 
 var sequelize = new Sequelize('d9ki06095ksntk', 'iatupkhoswxboy', 'JZsHbsHx6fi3Wc_lQ8s0CWGPZB', {
   host: 'ec2-54-243-47-213.compute-1.amazonaws.com',
-  dialect: 'heroku pg:psql --app heroku-postgres-c73ac359 HEROKU_POSTGRESQL_IVORY',
+  dialect: 'postgres',
 
   pool: {
     max: 5,
